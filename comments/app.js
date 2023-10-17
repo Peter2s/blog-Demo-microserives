@@ -32,7 +32,7 @@ app.post('/posts/:postId/comments', async (req, res) => {
             id, content, postId,status:'pending'
         }
     }
-    await axios.post("http://localhost:4005/events", event);
+    await axios.post("http://event-bus-srv:4005/events", event);
 
 
     res.status(201).json({data: commentsBtPostId[postId]});
@@ -56,7 +56,11 @@ app.post('/events',  async (req, res) => {
                 status:comment.status
             }
         }
-        await axios.post("http://localhost:4005/events",event).catch((error) => {console.log("error: " + error)})
+        await axios
+          .post("http://event-bus-srv:4005/events", event)
+          .catch((error) => {
+            console.log("error: " + error);
+          });
     }
 
     res.send({})

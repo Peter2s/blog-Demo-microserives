@@ -14,7 +14,8 @@ app.get('/posts',(req, res, next) => {
     res.status(200).json({posts} || []);
 })
 
-const handleEvent = (type,data) => {
+const handleEvent = (type, data) => {
+    
     if(type === "PostCreated"){
         const post = {...data,comments: []};
         posts[post.id] = post;
@@ -46,7 +47,7 @@ process.on('unhandledRejection', (reason, promise) => {
 
 app.listen(4002,async () => {
     console.log('listening on 4002')
-    const response = await axios.get('http://localhost:4005/events');
+    const response = await axios.get("http://event-bus-srv:4005/events");
     for(let event of response.data){
         handleEvent(event.type, event.data);
     }

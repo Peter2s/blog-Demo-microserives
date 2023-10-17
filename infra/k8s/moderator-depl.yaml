@@ -1,31 +1,31 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-depl
+  name: moderator-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: posts
+      app: moderator
   template:
     metadata:
       labels:
-        app: posts
+        app: moderator
     spec:
       containers:
-        - name: posts
-          image: peter2s/posts:latest
+        - name: moderator
+          image: peter2s/moderator:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-clusterip-srv
+  name: moderator-clusterip-srv
 spec:
   selector:
-    app: posts
+    app: moderator
   type: ClusterIP
   ports:
-    - name: posts
+    - name: moderator
       protocol: TCP
-      port: 4001
-      targetPort: 4001
+      port: 4003
+      targetPort: 4003
