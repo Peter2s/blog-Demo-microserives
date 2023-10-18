@@ -5,7 +5,7 @@ export const CreateComment = ({postId}) => {
 	const [content,setContent] = useState("");
 	const createComment = async (e) => {
 		e.preventDefault();
-		await axios.post(`http://localhost:4000/posts/${postId}/comments`,{content})
+		await axios.post(`http://blog-app.com/posts/${postId}/comments`,{content})
 		setContent("")
 	}
 	return (
